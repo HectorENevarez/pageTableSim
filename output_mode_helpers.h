@@ -1,6 +1,3 @@
-#ifndef OUTPUT_MODE_HELPERS_H
-#define OUTPUT_MODE_HELPERS_H
-
 /*
  * Compilation notes:
  * C compilers:
@@ -48,9 +45,9 @@ typedef struct {
 void report_logical2physical(uint32_t src, uint32_t dest);
 
 /*
- * report_logical2offselt
+ * report_logical2offset
  * Given a logical address and its offset, output a line:
- *	logical -> offset
+ *      logical -> offset
  */
 void report_logical2offset(uint32_t logical, uint32_t offset);
 
@@ -62,11 +59,11 @@ void report_logical2offset(uint32_t logical, uint32_t offset);
  * frames_used - Number of frames allocated
  * addreses - Number of addresses processed
  * bytes - Total number of bytes needed for data structure.  
- *	   Should include all levels, allocated arrays, etc.
+ *         Should include all levels, allocated arrays, etc.
  */
 void report_summary(unsigned int page_size, unsigned int hits, 
-		    unsigned int addresses, unsigned int frames_used,
-		    unsigned int bytes);
+                    unsigned int addresses, unsigned int frames_used,
+                    unsigned int bytes);
 
 /*
  * report_bitmasks
@@ -88,7 +85,4 @@ void report_bitmasks(int levels, uint32_t *masks);
  * frame - page is mapped to specified frame
  */
 void report_pagemap(uint32_t logical_addr, int levels, 
-		    uint32_t *pages, uint32_t frame);
-
-#endif
-
+                    uint32_t *pages, uint32_t frame);

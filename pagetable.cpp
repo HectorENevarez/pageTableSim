@@ -1,50 +1,19 @@
-#include <iostream>
-#include <stdio.h>
-#include <bitset>
-#include <string>
 #include <math.h> // pow
-#include <iostream>
-#include <fstream>
 
 #include "pagetable.h"
-#include "base_helpers.h"
 
+void setBitMaskAry(PAGETABLE *pageTable, int treeLevels[]); // sets the bit mask array of a specified page table
+void setEntryCount(PAGETABLE *pageTable, int treeLevels[]); // sets the entry count array of a specified page table
+void setShiftArray(PAGETABLE *pageTable, int treeLevels[]); // sets the shift array of a specified page table
 
-// TODO delete create page table and implement from main
-void createPageTable(PAGETABLE * pageTable, int treeLevels[], int levelCount){
-    // load in addresses and start assigning
+// initialize page table
+void initializePageTable(PAGETABLE *pageTable, int treeLevels[], int levelCount){
+    pageTable->levelCount = levelCount; // sets level count
 
-    int counter = 0; //tmep counter
-    std::string addressStr;
-    unsigned int address;
-    unsigned int frame, hit, miss;
-
-    std::ifstream addressFile;
-    addressFile.open("addresses.txt");
-
-    // test while loop
-    frame = 0;
-    hit = 0;
-    miss = 0;
-    while (getline(addressFile, addressStr)){
-        std::cout << addressStr << std::endl;
-        address = hexSTUI(addressStr);
-        
-        if (pageLookup(pageTable, address) == nullptr){
-            pageInsert(pageTable, address, frame);
-            frame++; // increments frame counter
-            miss++;
-        }
-        else{
-            hit++;
-        }
-        
-        
-        if (counter == 100000) break;
-        counter++;
-    }
-
-    std::cout << "hit: " << hit << " miss " << miss;
+    // setting all fields of the structure
+    setBitMaskAry(pageTable, treeLevels);
+    setEntryCount(pageTable, treeLevels);
+    setShiftArray(pageTable, treeLevels);
 };
 
 void setBitMaskAry(PAGETABLE *pageTable, int treeLevels[]){
